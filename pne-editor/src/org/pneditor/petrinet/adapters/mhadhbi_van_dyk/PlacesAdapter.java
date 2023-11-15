@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class PlacesAdapter extends AbstractPlace {
 	
 	private static int NEXT;
-	private static HashMap<String, int> reference = new HashMap<String, int>();
+	private static HashMap<String, Integer> reference = new HashMap<String, Integer>();
 
 	public PlacesAdapter(String label) {
 		super(label);
