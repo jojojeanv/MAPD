@@ -3,14 +3,24 @@ package org.pneditor.petrinet.adapters.mhadhbi_van_dyk;
 import org.pneditor.petrinet.AbstractArc;
 import org.pneditor.petrinet.AbstractNode;
 import org.pneditor.petrinet.ResetArcMultiplicityException;
+import NetworkClasses.*;
 
 
 public class ArcAdapter extends AbstractArc {
-
+	
+	private ArcIn arcIn;
+	private ArcOut arcOut;
+	
 	@Override
 	public AbstractNode getSource() {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.isRegular()) {
+			Transition origin = arcIn.getOrigin();
+			return TransitionAdapter(origin);
+		}
+		else {
+			Place origin = arcOut.getOrigin();
+			return PlaceAdapter(origin);
+		}
 	}
 
 	@Override
@@ -27,7 +37,6 @@ public class ArcAdapter extends AbstractArc {
 
 	@Override
 	public boolean isRegular() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
