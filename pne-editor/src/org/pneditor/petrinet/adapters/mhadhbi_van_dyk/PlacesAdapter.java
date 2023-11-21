@@ -1,40 +1,46 @@
 package org.pneditor.petrinet.adapters.mhadhbi_van_dyk;
 
 import org.pneditor.petrinet.AbstractPlace;
+
+import NetworkClasses.Place;
+
 import java.util.HashMap;
 
 public class PlacesAdapter extends AbstractPlace {
 	
+	private static HashMap<Integer, Place> reference = new HashMap<Integer, Place>();
 	private static int NEXT;
-	private static HashMap<String, Integer> reference = new HashMap<String, Integer>();
 
 	public PlacesAdapter(String label) {
 		super(label);
-		
+		this.setId(NEXT);
+		Place p = new Place();
+		reference.put(NEXT, p);	
+		NEXT++;
 	}
 
 	@Override
 	public void addToken() {
-		// TODO Auto-generated method stub
-		
+		Place p = reference.get(this.getId());
+		p.addTokens(1);
 	}
 
 	@Override
 	public void removeToken() {
-		// TODO Auto-generated method stub
-		
+		Place p = reference.get(this.getId());
+		p.removeTokens(1);
 	}
 
 	@Override
 	public int getTokens() {
-		// TODO Auto-generated method stub
-		return 0;
+		Place p = reference.get(this.getId());	
+		return p.getTokens();
 	}
 
 	@Override
 	public void setTokens(int tokens) {
-		// TODO Auto-generated method stub
-		
+		Place p = reference.get(this.getId());
+		p.addTokens(tokens-p.getTokens());
 	}
 
 }
