@@ -8,16 +8,18 @@ import NetworkClasses.Transition;
 
 public class TransitionAdapter extends AbstractTransition{
 	
-	private static HashMap<Integer, Transition> reference = new HashMap<Integer, Transition>();
 	private static int NEXT;
+	private Transition tr;
 	
-	public TransitionAdapter(String label) {
-		super(label);
+	public TransitionAdapter() {
+		super("T_" + NEXT);
 		this.setId(NEXT);
-		Transition tr = new Transition();
-		reference.put(NEXT,tr);
+		this.tr = new Transition();
 		NEXT++;
-		
 	}
-
+	
+	public Transition getConcreteTransition() {
+		return this.tr;
+	}
+	
 }

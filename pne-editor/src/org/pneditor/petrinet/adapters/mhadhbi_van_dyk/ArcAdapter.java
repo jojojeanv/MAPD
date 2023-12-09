@@ -3,59 +3,77 @@ package org.pneditor.petrinet.adapters.mhadhbi_van_dyk;
 import org.pneditor.petrinet.AbstractArc;
 import org.pneditor.petrinet.AbstractNode;
 import org.pneditor.petrinet.ResetArcMultiplicityException;
+
+import Exception.InexistentPlaceException;
 import NetworkClasses.*;
 
 
 public class ArcAdapter extends AbstractArc {
 	
-	private ArcIn arcIn;
-	private ArcOut arcOut;
+	private AbstractNode source;
+	private AbstractNode destination;
+	private Arc concreteArc;
+	
+	private boolean isInhibitory = false;
+	private boolean isReset = false;
+	private boolean isRegular = true;
+	
+	public ArcAdapter(AbstractNode source, AbstractNode destination) {
+		this.source = source;
+		this.destination = destination;
+	}
 	
 	@Override
 	public AbstractNode getSource() {
-		if (this.isRegular()) {
-			Transition origin = arcIn.getOrigin();
-			return TransitionAdapter(origin);
-		}
-		else {
-			Place origin = arcOut.getOrigin();
-			return PlaceAdapter(origin);
-		}
+		return source;
 	}
 
 	@Override
 	public AbstractNode getDestination() {
-		// TODO Auto-generated method stub
-		return null;
+		return destination;
 	}
 
 	@Override
 	public boolean isReset() {
-		// TODO Auto-generated method stub
-		return false;
+		return isReset;
 	}
 
 	@Override
 	public boolean isRegular() {
-		return false;
+		return isRegular;
 	}
 
 	@Override
 	public boolean isInhibitory() {
-		// TODO Auto-generated method stub
-		return false;
+		return isInhibitory;
 	}
 
 	@Override
 	public int getMultiplicity() throws ResetArcMultiplicityException {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.concreteArc.getWeight();
 	}
 
 	@Override
 	public void setMultiplicity(int multiplicity) throws ResetArcMultiplicityException {
-		// TODO Auto-generated method stub
-		
+		this.concreteArc.setWeight(multiplicity);
+	}
+	
+	public Arc getConcreteArc() {
+		return concreteArc;
+	}
+	
+	public void setConcreteArc(Arc arc) {
+		this.concreteArc = arc;
+	}
+	
+	public void setReset() {
+		this.isRegular = false;
+		this.isReset = true;
+	}
+	
+	public void setInhibitory() {
+		this.isInhibitory = true;
+		this.isRegular = false;
 	}
 
 }

@@ -1,6 +1,6 @@
 package NetworkClasses;
 
-public class Arc {
+public abstract class Arc {
 	
 	protected int weight;
 	
@@ -18,4 +18,5 @@ public class Arc {
 		this.weight = Math.abs(weight);
 	}
 	
+	public abstract boolean isIn();
 }

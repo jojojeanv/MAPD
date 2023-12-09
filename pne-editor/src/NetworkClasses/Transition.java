@@ -23,13 +23,13 @@ public class Transition extends Location {
 				}
 			}
 			
-			if (arc.getIsEmpty()) {
+			else if (arc.getIsEmpty()) {
 				if (arc.getOrigin().getTokens() == 0) {
 					return false;
 				}
 			}
 			
-			if (arc.getWeight() > arc.getOrigin().getTokens()) {
+			else if (arc.getWeight() > arc.getOrigin().getTokens()) {
 				return false;
 			}
 		}
